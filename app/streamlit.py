@@ -41,7 +41,11 @@ if user_input:
             st.session_state.chat_history.append(AIMessage(content=final_script))
 
             if final_score is not None:
-                st.success(f"Nota do roteiro: {final_score}/1000")
+                last_review = output.get("review_comment", None)
+                
+                with st.expander("🔍 Ver comentário da revisão"):
+                    st.success(f"Nota do roteiro: {final_score}/1000")
+                    st.markdown(last_review)
 
         except Exception as e:
             st.error(f"Erro ao gerar roteiro: {e}")
